@@ -1,9 +1,9 @@
-const ActivityLog = require('../models/ActivityLog');
+import ActivityLog from '../models/ActivityLog.js';
 
 // @desc    Get all activities for user
 // @route   GET /api/activities
 // @access  Private
-exports.getActivities = async (req, res, next) => {
+export const getActivities = async (req, res, next) => {
   try {
     const { page = 1, limit = 20 } = req.query;
 

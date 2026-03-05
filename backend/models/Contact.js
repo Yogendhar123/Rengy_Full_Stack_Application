@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const contactSchema = new mongoose.Schema({
   user: {
@@ -46,5 +46,7 @@ const contactSchema = new mongoose.Schema({
 // Index for search functionality
 contactSchema.index({ name: 'text', email: 'text' });
 
-module.exports = mongoose.model('Contact', contactSchema);
+const Contact = mongoose.model('Contact', contactSchema);
+
+export default Contact;
 

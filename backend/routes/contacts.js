@@ -1,15 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const { body, validationResult } = require('express-validator');
-const { protect } = require('../middleware/auth');
-const { 
+import express from 'express';
+import { body, validationResult } from 'express-validator';
+import { protect } from '../middleware/auth.js';
+import { 
   getContacts, 
   getContact, 
   createContact, 
   updateContact, 
   deleteContact,
   exportContacts 
-} = require('../controllers/contactController');
+} from '../controllers/contactController.js';
+
+const router = express.Router();
 
 // Validation middleware
 const validate = (req, res, next) => {
@@ -67,5 +68,5 @@ router.put('/:id', protect, [
 // @access  Private
 router.delete('/:id', protect, deleteContact);
 
-module.exports = router;
+export default router;
 

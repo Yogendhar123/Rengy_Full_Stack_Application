@@ -1,12 +1,13 @@
-const express = require('express');
+import express from 'express';
+import { protect } from '../middleware/auth.js';
+import { getActivities } from '../controllers/activityController.js';
+
 const router = express.Router();
-const { protect } = require('../middleware/auth');
-const { getActivities } = require('../controllers/activityController');
 
 // @route   GET /api/activities
 // @desc    Get all activities
 // @access  Private
 router.get('/', protect, getActivities);
 
-module.exports = router;
+export default router;
 

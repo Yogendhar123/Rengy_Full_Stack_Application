@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const { logActivity } = require('../utils/activityLogger');
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import { logActivity } from '../utils/activityLogger.js';
 
 // Generate JWT Token
 const generateToken = (id) => {
@@ -28,7 +28,7 @@ const sendTokenResponse = (user, statusCode, res) => {
 // @desc    Register user
 // @route   POST /api/auth/signup
 // @access  Public
-exports.signup = async (req, res, next) => {
+export const signup = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
@@ -64,7 +64,7 @@ exports.signup = async (req, res, next) => {
 // @desc    Login user
 // @route   POST /api/auth/signin
 // @access  Public
-exports.signin = async (req, res, next) => {
+export const signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -111,7 +111,7 @@ exports.signin = async (req, res, next) => {
 // @desc    Get current logged in user
 // @route   GET /api/auth/me
 // @access  Private
-exports.getMe = async (req, res, next) => {
+export const getMe = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
 
@@ -135,7 +135,7 @@ exports.getMe = async (req, res, next) => {
 // @desc    Refresh token
 // @route   POST /api/auth/refresh
 // @access  Private
-exports.refreshToken = async (req, res, next) => {
+export const refreshToken = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
     

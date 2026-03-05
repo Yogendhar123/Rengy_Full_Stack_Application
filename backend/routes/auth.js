@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
+import { body, validationResult } from 'express-validator';
+import { protect } from '../middleware/auth.js';
+import { loginLimiter } from '../middleware/rateLimiter.js';
+import { signup, signin, getMe, refreshToken } from '../controllers/authController.js';
+
 const router = express.Router();
-const { body, validationResult } = require('express-validator');
-const { protect } = require('../middleware/auth');
-const { loginLimiter } = require('../middleware/rateLimiter');
-const { signup, signin, getMe, refreshToken } = require('../controllers/authController');
 
 // Validation middleware
 const validate = (req, res, next) => {
@@ -44,5 +45,5 @@ router.get('/me', protect, getMe);
 // @access  Private
 router.post('/refresh', protect, refreshToken);
 
-module.exports = router;
+export default router;
 

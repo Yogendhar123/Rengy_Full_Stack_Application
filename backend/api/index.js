@@ -1,16 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import connectDB from './config/db.js';
-import authRoutes from './routes/auth.js';
-import contactRoutes from './routes/contacts.js';
-import activityRoutes from './routes/activities.js';
+import mongoose from 'mongoose';
+import authRoutes from '../routes/auth.js';
+import contactRoutes from '../routes/contacts.js';
+import activityRoutes from '../routes/activities.js';
 
-// Load env vars
 dotenv.config();
-
-// Connect to database
-connectDB();
 
 const app = express();
 
@@ -37,11 +33,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Connect to MongoDB (only if URI is provided)
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
+}
 
 export default app;
 

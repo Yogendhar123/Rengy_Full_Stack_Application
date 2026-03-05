@@ -1,7 +1,7 @@
-const rateLimit = require('express-rate-limit');
+import rateLimit from 'express-rate-limit';
 
 // Rate limiter for login - 3 requests per 10 minutes
-exports.loginLimiter = rateLimit({
+export const loginLimiter = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 minutes
   max: 3, // Limit each IP to 3 requests per windowMs
   message: {
@@ -14,7 +14,7 @@ exports.loginLimiter = rateLimit({
 });
 
 // General API rate limiter
-exports.apiLimiter = rateLimit({
+export const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
   message: {

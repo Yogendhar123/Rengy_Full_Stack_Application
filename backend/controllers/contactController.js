@@ -1,10 +1,10 @@
-const Contact = require('../models/Contact');
-const { logActivity } = require('../utils/activityLogger');
+import Contact from '../models/Contact.js';
+import { logActivity } from '../utils/activityLogger.js';
 
 // @desc    Get all contacts for user
 // @route   GET /api/contacts
 // @access  Private
-exports.getContacts = async (req, res, next) => {
+export const getContacts = async (req, res, next) => {
   try {
     const { page = 1, limit = 10, search, status } = req.query;
 
@@ -53,7 +53,7 @@ exports.getContacts = async (req, res, next) => {
 // @desc    Get single contact
 // @route   GET /api/contacts/:id
 // @access  Private
-exports.getContact = async (req, res, next) => {
+export const getContact = async (req, res, next) => {
   try {
     const contact = await Contact.findOne({
       _id: req.params.id,
@@ -82,7 +82,7 @@ exports.getContact = async (req, res, next) => {
 // @desc    Create new contact
 // @route   POST /api/contacts
 // @access  Private
-exports.createContact = async (req, res, next) => {
+export const createContact = async (req, res, next) => {
   try {
     const { name, email, phone, company, status, notes } = req.body;
 
@@ -119,7 +119,7 @@ exports.createContact = async (req, res, next) => {
 // @desc    Update contact
 // @route   PUT /api/contacts/:id
 // @access  Private
-exports.updateContact = async (req, res, next) => {
+export const updateContact = async (req, res, next) => {
   try {
     let contact = await Contact.findOne({
       _id: req.params.id,
@@ -164,7 +164,7 @@ exports.updateContact = async (req, res, next) => {
 // @desc    Delete contact
 // @route   DELETE /api/contacts/:id
 // @access  Private
-exports.deleteContact = async (req, res, next) => {
+export const deleteContact = async (req, res, next) => {
   try {
     const contact = await Contact.findOne({
       _id: req.params.id,
@@ -203,7 +203,7 @@ exports.deleteContact = async (req, res, next) => {
 // @desc    Export contacts as CSV
 // @route   GET /api/contacts/export
 // @access  Private
-exports.exportContacts = async (req, res, next) => {
+export const exportContacts = async (req, res, next) => {
   try {
     const contacts = await Contact.find({ user: req.user.id }).sort({ createdAt: -1 });
 

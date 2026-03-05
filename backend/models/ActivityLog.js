@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const activityLogSchema = new mongoose.Schema({
   user: {
@@ -30,5 +30,7 @@ const activityLogSchema = new mongoose.Schema({
 // Index for efficient querying
 activityLogSchema.index({ user: 1, createdAt: -1 });
 
-module.exports = mongoose.model('ActivityLog', activityLogSchema);
+const ActivityLog = mongoose.model('ActivityLog', activityLogSchema);
+
+export default ActivityLog;
 

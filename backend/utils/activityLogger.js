@@ -1,7 +1,7 @@
-const ActivityLog = require('../models/ActivityLog');
+import ActivityLog from '../models/ActivityLog.js';
 
 // Log user activity
-exports.logActivity = async (userId, action, contactId, description) => {
+export const logActivity = async (userId, action, contactId, description) => {
   try {
     await ActivityLog.create({
       user: userId,
