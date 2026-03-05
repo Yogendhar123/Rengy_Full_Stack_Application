@@ -14,8 +14,16 @@ connectDB();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000'
+  ],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
@@ -44,4 +52,3 @@ app.listen(PORT, () => {
 });
 
 export default app;
-
