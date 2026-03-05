@@ -1,0 +1,294 @@
+{
+  "info": {
+    "name": "RENGY CRM API",
+    "description": "Mini-CRM Application API Documentation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/signup",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "signup"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/signin",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "signin"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "refresh"]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contacts",
+      "item": [
+        {
+          "name": "Get All Contacts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/contacts?page=1&limit=10&search=&status=",
+              "host": ["{{baseUrl}}"],
+              "path": ["contacts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "key": "status",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Single Contact",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/contacts/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["contacts", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "contact_id_here"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Create Contact",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/contacts",
+              "host": ["{{baseUrl}}"],
+              "path": ["contacts"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Smith\",\n  \"email\": \"jane@example.com\",\n  \"phone\": \"1234567890\",\n  \"company\": \"ABC Corp\",\n  \"status\": \"lead\",\n  \"notes\": \"Initial contact\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Contact",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/contacts/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["contacts", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "contact_id_here"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Smith Updated\",\n  \"status\": \"prospect\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Contact",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/contacts/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["contacts", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "contact_id_here"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Export Contacts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/contacts/export",
+              "host": ["{{baseUrl}}"],
+              "path": ["contacts", "export"]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activities",
+      "item": [
+        {
+          "name": "Get All Activities",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/activities?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
