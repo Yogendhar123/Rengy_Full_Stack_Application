@@ -10,9 +10,10 @@ dotenv.config();
 
 const app = express();
 
-// CORS configuration - allow specific frontend origin
+// CORS configuration - allow specific frontend origins
 const corsOptions = {
   origin: [
+    'https://rengyui.netlify.app',
     'https://rengy-full-stack-application.vercel.app',
     'http://localhost:5173',
     'http://localhost:3000'
